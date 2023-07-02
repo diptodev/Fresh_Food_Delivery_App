@@ -13,14 +13,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,9 +34,9 @@ import com.excitedbroltd.freshfood.ui.theme.LightGray
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Skip() {
-    var pageNumber by remember {
-        mutableStateOf(0)
-    }
+    val pageCount = 10
+    val pagerState = rememberPagerState(0)
+
     val skip = listOf(
         SkipDataCalls(
             "Welcome to",
@@ -88,9 +85,7 @@ fun Skip() {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
-            HorizontalPager(pageCount = skip.size, key = {
-                it
-            }) {
+            HorizontalPager(pageCount = skip.size, state = pagerState) {
                 // pageNumber = it
                 val skip = skip[it]
                 Column(
@@ -165,7 +160,7 @@ fun Skip() {
                         Text(
                             text = ".",
                             style = MaterialTheme.typography.titleLarge,
-                            color = if (pageNumber == i) DeepGreen else LightGray
+                            color = if (pagerState.currentPage == i) DeepGreen else LightGray
                         )
                     }
 
@@ -178,7 +173,7 @@ fun Skip() {
                     .background(DeepGreen)
                     .padding(13.dp), contentAlignment = Alignment.Center) {
                     Text(
-                        text = "Skip",
+                        text = if (pagerState.currentPage == 3) "Next" else "Skip",
                         style = MaterialTheme.typography.bodySmall,
                         color = Color.White.copy(alpha = 0.8f)
                     )
