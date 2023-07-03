@@ -22,10 +22,12 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Gray
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -44,7 +46,7 @@ fun LogIn() {
                 .size(400.dp)
                 .background(
                     brush = Brush.linearGradient(
-                        listOf(LightGray, Color.White)
+                        listOf(LightGray, White)
                     )
                 ),
             contentAlignment = Alignment.BottomCenter
@@ -84,12 +86,21 @@ fun LogIn() {
                 TextField(
                     modifier = Modifier
                         .padding(start = 20.dp)
-                        .clip(RoundedCornerShape(30.dp)),
-                    colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent,
-                        focusedLabelColor = Gray
+                        .shadow(
+                            elevation = 2.dp,
+                            ambientColor = Black.copy(alpha = 0.5f),
+                            spotColor = Black.copy(alpha = 0.5f),
+                            clip = true,
+                            shape = RoundedCornerShape(30.dp)
+                        ),
+                    colors = TextFieldDefaults.colors(
+                        focusedIndicatorColor = Transparent,
+                        unfocusedIndicatorColor = Transparent,
+                        disabledIndicatorColor = Transparent,
+                        focusedLabelColor = Gray,
+                        focusedContainerColor = White,
+                        unfocusedContainerColor = White,
+                        disabledContainerColor = White
                     ),
                     enabled = true,
                     isError = false,
@@ -114,13 +125,23 @@ fun LogIn() {
                     onValueChange = {
 
                     })
+
                 TextField(modifier = Modifier
                     .padding(start = 20.dp, top = 10.dp)
-                    .clip(RoundedCornerShape(30.dp)),
-                    colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        focusedLabelColor = Gray
+                    .shadow(
+                        elevation = 2.dp,
+                        ambientColor = Black.copy(alpha = 0.5f),
+                        spotColor = Black.copy(alpha = 0.5f),
+                        clip = true,
+                        shape = RoundedCornerShape(30.dp)
+                    ),
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = White,
+                        unfocusedContainerColor = White,
+                        disabledContainerColor = Transparent,
+                        focusedIndicatorColor = Transparent,
+                        unfocusedIndicatorColor = Transparent,
+                        focusedLabelColor = Gray,
                     ),
                     value = "", label = {
                         Row(
