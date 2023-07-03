@@ -3,7 +3,7 @@ package com.excitedbroltd.freshfood
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.excitedbroltd.freshfood.ui.screens.SplashScreen.Skip
+import com.excitedbroltd.freshfood.ui.screens.signupscreen.Welcome
 import com.excitedbroltd.freshfood.ui.theme.FreshFoodTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,8 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FreshFoodTheme {
-                Skip()
-
+                Welcome()
             }
         }
     }

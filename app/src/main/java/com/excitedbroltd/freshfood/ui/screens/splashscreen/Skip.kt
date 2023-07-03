@@ -1,4 +1,4 @@
-package com.excitedbroltd.freshfood.ui.screens.SplashScreen
+package com.excitedbroltd.freshfood.ui.screens.splashscreen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
