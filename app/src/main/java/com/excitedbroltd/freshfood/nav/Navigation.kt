@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.excitedbroltd.freshfood.ui.screens.signupscreen.LogIn
+import com.excitedbroltd.freshfood.ui.screens.signupscreen.SignUpScreen
 import com.excitedbroltd.freshfood.ui.screens.splashscreen.GetStarted
 import com.excitedbroltd.freshfood.ui.screens.splashscreen.Skip
 
@@ -59,6 +60,9 @@ fun Navigation() {
             }
         ) {
             Skip(navController)
+        }
+        composable(route = Screen.SignUp.route) {
+            SignUpScreen(navController)
         }
     }
 

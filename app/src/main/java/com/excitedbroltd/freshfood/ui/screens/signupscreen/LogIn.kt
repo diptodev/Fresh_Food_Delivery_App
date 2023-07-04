@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.excitedbroltd.freshfood.R
+import com.excitedbroltd.freshfood.nav.Screen
 import com.excitedbroltd.freshfood.ui.theme.DeepGreen
 import com.excitedbroltd.freshfood.ui.theme.LightGray
 
@@ -232,7 +233,11 @@ fun LogIn(navController: NavHostController) {
                 Text(
                     text = "register now!", style = MaterialTheme.typography.bodySmall,
                     fontSize = 14.sp,
-                    color = Blue
+                    color = Blue,
+                    modifier = Modifier.clickable {
+                        navController.navigate(Screen.SignUp.route) {
+                        }
+                    }
                 )
             }
         }
