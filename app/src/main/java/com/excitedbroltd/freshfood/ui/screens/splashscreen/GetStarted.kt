@@ -20,12 +20,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.excitedbroltd.freshfood.R
+import com.excitedbroltd.freshfood.nav.Screen
 import com.excitedbroltd.freshfood.ui.theme.DeepGreen
 import com.excitedbroltd.freshfood.ui.theme.LightGray
 
 @Composable
-fun GetStarted() {
+fun GetStarted(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -75,7 +77,13 @@ fun GetStarted() {
                     Modifier
                         .padding(top = 50.dp, start = 30.dp, end = 30.dp, bottom = 40.dp)
                         .clip(RoundedCornerShape(20.dp))
-                        .clickable { }
+                        .clickable {
+                            navController.navigate(Screen.Skip.route) {
+                                popUpTo(Screen.GetStarted.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
                         .background(DeepGreen)
                         .fillMaxWidth()
                         .padding(10.dp),

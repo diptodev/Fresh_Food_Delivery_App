@@ -26,14 +26,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.excitedbroltd.freshfood.R
 import com.excitedbroltd.freshfood.dataclass.SkipDataCalls
+import com.excitedbroltd.freshfood.nav.Screen
 import com.excitedbroltd.freshfood.ui.theme.DeepGreen
 import com.excitedbroltd.freshfood.ui.theme.LightGray
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Skip() {
+fun Skip(navController: NavHostController) {
     val pageCount = 10
     val pagerState = rememberPagerState(0)
 
@@ -169,7 +171,13 @@ fun Skip() {
                     .fillMaxWidth()
                     .padding(top = 15.dp, bottom = 45.dp, start = 25.dp, end = 25.dp)
                     .clip(RoundedCornerShape(20.dp))
-                    .clickable { }
+                    .clickable {
+                        navController.navigate(Screen.LogIn.route) {
+                            popUpTo(Screen.Skip.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
                     .background(DeepGreen)
                     .padding(13.dp), contentAlignment = Alignment.Center) {
                     Text(

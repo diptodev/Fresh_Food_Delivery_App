@@ -33,12 +33,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.excitedbroltd.freshfood.R
 import com.excitedbroltd.freshfood.ui.theme.LightGray
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LogIn() {
+fun LogIn(navController: NavHostController) {
     Column(modifier = Modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
@@ -79,10 +80,7 @@ fun LogIn() {
                     .padding(top = 20.dp)
                     .fillMaxWidth()
             ) {
-                val colors = TextFieldDefaults.textFieldColors(
-                    containerColor = White,
-                    focusedIndicatorColor = Gray
-                )
+
                 TextField(
                     modifier = Modifier
                         .padding(start = 20.dp)
