@@ -4,15 +4,19 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -36,8 +40,12 @@ import com.excitedbroltd.freshfood.ui.theme.LightGray
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Skip(navController: NavHostController) {
-    val pageCount = 10
-    val pagerState = rememberPagerState(0)
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f
+    ) {
+        4
+    }
 
     val skip = listOf(
         SkipDataCalls(
@@ -87,69 +95,85 @@ fun Skip(navController: NavHostController) {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
-            HorizontalPager(pageCount = skip.size, state = pagerState) {
-                // pageNumber = it
-                val skip = skip[it]
-                Column(
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+            // pageNumber = it
+            HorizontalPager(
+                modifier = Modifier,
+                state = pagerState,
+                pageSpacing = 0.dp,
 
-                    Box(
-                        modifier = Modifier
-                            .padding(top = 100.dp)
-                            .size(300.dp),
-                        contentAlignment = Alignment.Center
-
-                    ) {
-                        Image(
-                            painter = painterResource(id = skip.pictureId),
-                            contentDescription = skip.title1
-                        )
-                    }
+                userScrollEnabled = true,
+                reverseLayout = false,
+                contentPadding = PaddingValues(0.dp),
+                beyondBoundsPageCount = 0,
+                pageSize = PageSize.Fill,
+                key = null,
+                pageNestedScrollConnection = PagerDefaults.pageNestedScrollConnection(
+                    Orientation.Horizontal
+                ),
+                pageContent = {
+                    // pageNumber = it
+                    val mskip = skip[it]
                     Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
+                        verticalArrangement = Arrangement.SpaceBetween,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
-                            text = skip.title1,
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center,
-                            fontSize = 30.sp
-                        )
-                        Text(
-                            text = skip.title2,
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center,
-                            fontSize = 30.sp
-                        )
-                        Text(
-                            text = skip.title3,
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center,
-                            fontSize = 30.sp
-                        )
-                    }
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
 
-                    ) {
-                        Text(
-                            text = skip.desc1,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LightGray
-                        )
-                        Text(
-                            text = skip.desc2,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LightGray
-                        )
+                        Box(
+                            modifier = Modifier
+                                .padding(top = 100.dp)
+                                .size(300.dp),
+                            contentAlignment = Alignment.Center
+
+                        ) {
+                            Image(
+                                painter = painterResource(id = mskip.pictureId),
+                                contentDescription = mskip.title1
+                            )
+                        }
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = mskip.title1,
+                                style = MaterialTheme.typography.titleLarge,
+                                textAlign = TextAlign.Center,
+                                fontSize = 30.sp
+                            )
+                            Text(
+                                text = mskip.title2,
+                                style = MaterialTheme.typography.titleLarge,
+                                textAlign = TextAlign.Center,
+                                fontSize = 30.sp
+                            )
+                            Text(
+                                text = mskip.title3,
+                                style = MaterialTheme.typography.titleLarge,
+                                textAlign = TextAlign.Center,
+                                fontSize = 30.sp
+                            )
+                        }
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceBetween
+
+                        ) {
+                            Text(
+                                text = mskip.desc1,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LightGray
+                            )
+                            Text(
+                                text = mskip.desc2,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = LightGray
+                            )
+                        }
                     }
                 }
-            }
+            )
 
 
             Column() {

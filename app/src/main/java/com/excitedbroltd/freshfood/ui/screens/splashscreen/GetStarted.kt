@@ -13,6 +13,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +33,12 @@ import com.excitedbroltd.freshfood.ui.theme.LightGray
 
 @Composable
 fun GetStarted(navController: NavHostController) {
+    var isVisible by remember {
+        mutableStateOf(false)
+    }
+    LaunchedEffect(key1 = true) {
+        isVisible = true
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -41,6 +52,7 @@ fun GetStarted(navController: NavHostController) {
             ),
         contentAlignment = Alignment.Center
     ) {
+
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -69,19 +81,22 @@ fun GetStarted(navController: NavHostController) {
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
                 Image(
                     painter = painterResource(id = R.drawable.splash_screen_fruits),
                     contentDescription = "Fresh Fruit",
                 )
+
                 Box(
                     Modifier
                         .padding(top = 50.dp, start = 30.dp, end = 30.dp, bottom = 40.dp)
                         .clip(RoundedCornerShape(20.dp))
                         .clickable {
+                            isVisible = false
                             navController.navigate(Screen.Skip.route) {
-                                popUpTo(Screen.GetStarted.route) {
-                                    inclusive = true
-                                }
+                                    popUpTo(Screen.GetStarted.route) {
+                                        inclusive = true
+                                    }
                             }
                         }
                         .background(DeepGreen)

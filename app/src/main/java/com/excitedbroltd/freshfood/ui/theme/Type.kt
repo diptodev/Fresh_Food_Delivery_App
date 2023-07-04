@@ -36,7 +36,7 @@ val typography = Typography(
     ),
     bodySmall = TextStyle(
         fontFamily = PoppinsFont,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Light,
         fontSize = 15.sp
     )
     /* Other default text styles to override
