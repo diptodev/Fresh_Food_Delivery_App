@@ -204,6 +204,7 @@ fun LogIn(navController: NavHostController) {
                     .padding(start = 45.dp, end = 30.dp)
                     .clip(RoundedCornerShape(40.dp))
                     .clickable {
+                        navController.navigate(Screen.Home.route)
                     }
                     .background(DeepGreen)
                     .fillMaxWidth()
@@ -236,6 +237,7 @@ fun LogIn(navController: NavHostController) {
                     color = Blue,
                     modifier = Modifier.clickable {
                         navController.navigate(Screen.SignUp.route) {
+
                         }
                     }
                 )

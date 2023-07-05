@@ -1,8 +1,16 @@
 package com.excitedbroltd.freshfood.nav
 
+const val AUTH_GRAPH = "auth_graph"
+const val SPLASH_GRAPH = "splash_graph"
+const val ROOT = "root"
+const val MAIN = "main"
+
 sealed class Screen(val route: String) {
     object GetStarted : Screen("get_started")
     object Skip : Screen("skip")
     object LogIn : Screen("login")
     object SignUp : Screen("signup")
+    object WelcomePage : Screen("welcome_page")
+    object Home : Screen("home")
+
 }

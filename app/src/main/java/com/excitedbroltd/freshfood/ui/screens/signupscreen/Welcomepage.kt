@@ -2,6 +2,7 @@ package com.excitedbroltd.freshfood.ui.screens.signupscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,13 +26,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.excitedbroltd.freshfood.R
+import com.excitedbroltd.freshfood.nav.Screen
 import com.excitedbroltd.freshfood.ui.theme.DeepGreen
 import com.excitedbroltd.freshfood.ui.theme.LightGray
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Welcome() {
+fun Welcome(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -61,7 +64,7 @@ fun Welcome() {
                     contentScale = ContentScale.Crop
                 )
             }
-            Column() {
+            Column {
                 Text(text = "Welcome", style = MaterialTheme.typography.titleLarge)
                 Text(
                     text = "Fresh Food online grocery store is the no 1 ",
@@ -100,9 +103,11 @@ fun Welcome() {
                             painter = painterResource(id = R.drawable.icon_google),
                             contentDescription = "Connect using google",
                             tint = Color.Red,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier
+                                .size(20.dp)
+                                .padding(end = 5.dp)
                         )
-                        Text(text = "Create an account", color = Color.Black)
+                        Text(text = "Connect using google", color = Color.Black)
                     }
                 }
                 Card(
@@ -122,10 +127,12 @@ fun Welcome() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.icon_google),
+                            painter = painterResource(id = R.drawable.icon_lock),
                             contentDescription = "Connect using google",
                             tint = Color.Red,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier
+                                .size(20.dp)
+                                .padding(end = 5.dp)
                         )
                         Text(text = "Create an account", color = Color.White)
                     }
@@ -141,7 +148,12 @@ fun Welcome() {
                     Text(
                         text = "Login",
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.Black.copy(0.6f)
+                        color = Color.Black.copy(0.6f),
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.LogIn.route) {
+
+                            }
+                        }
                     )
                 }
             }
