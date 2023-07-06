@@ -50,7 +50,7 @@ fun Welcome(navController: NavHostController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .size(400.dp)
+                    .size(350.dp)
                     .background(
                         brush = Brush.linearGradient(
                             listOf(LightGray, Color.White)
@@ -111,7 +111,9 @@ fun Welcome(navController: NavHostController) {
                     }
                 }
                 Card(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(Screen.SignUp.route)
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(end = 20.dp, start = 20.dp),

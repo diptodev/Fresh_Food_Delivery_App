@@ -49,7 +49,7 @@ fun LogIn(navController: NavHostController) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .size(400.dp)
+                .size(350.dp)
                 .background(
                     brush = Brush.linearGradient(
                         listOf(LightGray, White)
