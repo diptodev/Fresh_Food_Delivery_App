@@ -1,4 +1,4 @@
-package com.excitedbroltd.freshfood.ui.screens.mainscreen
+package com.excitedbroltd.freshfood.ui.screens.main_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

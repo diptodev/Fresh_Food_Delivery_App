@@ -10,8 +10,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.excitedbroltd.freshfood.ui.screens.splashscreen.GetStarted
-import com.excitedbroltd.freshfood.ui.screens.splashscreen.Skip
+import com.excitedbroltd.freshfood.ui.screens.splash_screen.GetStarted
+import com.excitedbroltd.freshfood.ui.screens.splash_screen.Skip
 
 fun NavGraphBuilder.SplashScreenGraph(navController: NavHostController) {
     navigation(startDestination = Screen.GetStarted.route, route = SPLASH_GRAPH) {

@@ -1,4 +1,4 @@
-package com.excitedbroltd.freshfood.ui.screens.signupscreen
+package com.excitedbroltd.freshfood.ui.screens.auth_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
