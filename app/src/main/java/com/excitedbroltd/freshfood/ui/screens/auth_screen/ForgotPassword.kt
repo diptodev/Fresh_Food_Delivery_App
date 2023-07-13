@@ -118,7 +118,7 @@ fun ForgotPassword() {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Next",
+                    text = "Send link",
                     style = MaterialTheme.typography.titleSmall,
                     color = Color.White
                 )
