@@ -25,9 +25,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +37,9 @@ import com.excitedbroltd.freshfood.ui.theme.DeepGreen
 
 @Composable
 fun EnterCode(navController: NavHostController) {
+    var focusRequester = remember {
+        FocusRequester()
+    }
     val focusManager = LocalFocusManager.current
     var otp1 by remember {
         mutableStateOf("")
@@ -55,13 +59,17 @@ fun EnterCode(navController: NavHostController) {
     var otp6 by remember {
         mutableStateOf("")
     }
+    LaunchedEffect(key1 = Unit) {
+        focusRequester.requestFocus()
+    }
     LaunchedEffect(key1 = otp1) {
         if (otp1.isNotEmpty()) {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Next
-            )
+//            focusManager.moveFocus(
+//                focusDirection = FocusDirection.Next
+//            )
         }
     }
+
     LaunchedEffect(key1 = otp2) {
         if (otp2.isNotEmpty()) {
             focusManager.moveFocus(
@@ -143,12 +151,13 @@ fun EnterCode(navController: NavHostController) {
                 OutlinedTextField(
                     modifier = Modifier
                         .width(50.dp)
-                        .padding(2.dp),
+                        .padding(2.dp)
+                        .focusRequester(focusRequester),
                     value = "$otp1",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
-                    ),
+                        ),
                     onValueChange = {
                         if (it.length < 2) {
                             otp1 = it
@@ -162,7 +171,7 @@ fun EnterCode(navController: NavHostController) {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
-                    ),
+                        ),
                     onValueChange = {
                         if (it.length < 2) {
                             otp2 = it
@@ -176,7 +185,7 @@ fun EnterCode(navController: NavHostController) {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
-                    ),
+                        ),
                     onValueChange = {
                         if (it.length < 2) {
                             otp3 = it
@@ -190,7 +199,7 @@ fun EnterCode(navController: NavHostController) {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
-                    ),
+                        ),
                     onValueChange = {
                         if (it.length < 2) {
                             otp4 = it
@@ -204,7 +213,7 @@ fun EnterCode(navController: NavHostController) {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
-                    ),
+                        ),
                     onValueChange = {
                         if (it.length < 2) {
                             otp5 = it
@@ -218,7 +227,7 @@ fun EnterCode(navController: NavHostController) {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
-                    ),
+                        ),
                     onValueChange = {
                         if (it.length < 2) {
                             otp6 = it

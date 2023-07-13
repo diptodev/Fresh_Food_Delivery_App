@@ -10,6 +10,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.excitedbroltd.freshfood.ui.screens.auth_screen.ForgotPassword
 import com.excitedbroltd.freshfood.ui.screens.auth_screen.LogIn
 import com.excitedbroltd.freshfood.ui.screens.auth_screen.SignUpScreen
 import com.excitedbroltd.freshfood.ui.screens.auth_screen.Welcome
@@ -156,6 +157,35 @@ fun NavGraphBuilder.AuthGraph(navController: NavHostController) {
 
         ) {
             EnterCode(navController)
+        }
+        composable(
+            route = Screen.Forgot_password.route,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { 600 },
+                    animationSpec = tween(300, easing = FastOutSlowInEasing)
+                ) + fadeIn(tween(300))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { 600 },
+                    animationSpec = tween(300, easing = FastOutSlowInEasing)
+                ) + fadeOut(tween(300))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { 600 },
+                    animationSpec = tween(300, easing = FastOutSlowInEasing)
+                ) + fadeOut(tween(300))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -600 }, animationSpec = tween(durationMillis = 300)
+                ) + fadeIn(tween(300))
+            }
+
+        ) {
+            ForgotPassword()
         }
     }
 }

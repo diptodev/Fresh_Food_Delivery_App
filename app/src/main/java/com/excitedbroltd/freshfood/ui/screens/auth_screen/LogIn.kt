@@ -192,7 +192,10 @@ fun LogIn(navController: NavHostController) {
                         text = "Forgot password?",
                         style = MaterialTheme.typography.bodySmall,
                         fontSize = 14.sp,
-                        color = Blue
+                        color = Blue,
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.Forgot_password.route)
+                        }
                     )
                 }
             }
