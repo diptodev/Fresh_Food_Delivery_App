@@ -1,5 +1,6 @@
 package com.excitedbroltd.freshfood.ui.screens.auth_screen.number_verification
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -28,6 +30,9 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -40,6 +45,7 @@ fun EnterCode(navController: NavHostController) {
     var focusRequester = remember {
         FocusRequester()
     }
+
     val focusManager = LocalFocusManager.current
     var otp1 by remember {
         mutableStateOf("")
@@ -61,65 +67,6 @@ fun EnterCode(navController: NavHostController) {
     }
     LaunchedEffect(key1 = Unit) {
         focusRequester.requestFocus()
-    }
-    LaunchedEffect(key1 = otp1) {
-        if (otp1.isNotEmpty()) {
-//            focusManager.moveFocus(
-//                focusDirection = FocusDirection.Next
-//            )
-        }
-    }
-
-    LaunchedEffect(key1 = otp2) {
-        if (otp2.isNotEmpty()) {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Next
-            )
-        } else {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Previous
-            )
-        }
-    }
-    LaunchedEffect(key1 = otp3) {
-        if (otp3.isNotEmpty()) {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Next
-            )
-        } else {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Previous
-            )
-        }
-    }
-    LaunchedEffect(key1 = otp4) {
-        if (otp4.isNotEmpty()) {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Next
-            )
-        } else {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Previous
-            )
-        }
-    }
-    LaunchedEffect(key1 = otp5) {
-        if (otp5.isNotEmpty()) {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Next
-            )
-        } else {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Previous
-            )
-        }
-    }
-    LaunchedEffect(key1 = otp6) {
-        if (otp6.isEmpty()) {
-            focusManager.moveFocus(
-                focusDirection = FocusDirection.Previous
-            )
-        }
     }
 
     Column(
@@ -156,45 +103,86 @@ fun EnterCode(navController: NavHostController) {
                     value = "$otp1",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
+                    ),
 
-                        ),
                     onValueChange = {
                         if (it.length < 2) {
                             otp1 = it
+                            if (otp1.isNotEmpty()) {
+                                focusManager.moveFocus(focusDirection = FocusDirection.Next)
+                            }
                         }
                     })
                 OutlinedTextField(
                     modifier = Modifier
                         .width(50.dp)
-                        .padding(2.dp),
+                        .padding(2.dp)
+                        .onKeyEvent {
+                            var count = 0;
+                            if (it.key == Key.Backspace) {
+                                count++
+                                if (count == 2) {
+                                    focusManager.moveFocus(focusDirection = FocusDirection.Previous)
+                                }
+                            }
+                            true
+                        },
                     value = "$otp2",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
                         ),
                     onValueChange = {
+
                         if (it.length < 2) {
                             otp2 = it
+
+                            focusManager.moveFocus(focusDirection = FocusDirection.Next)
+
                         }
                     })
                 OutlinedTextField(
                     modifier = Modifier
                         .width(50.dp)
-                        .padding(2.dp),
+                        .padding(2.dp)
+                        .onKeyEvent {
+                            var count = 0;
+                            if (it.key == Key.Backspace) {
+                                count++
+
+                                focusManager.moveFocus(focusDirection = FocusDirection.Previous)
+
+                            }
+                            true
+                        },
                     value = "$otp3",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
 
                         ),
+
                     onValueChange = {
                         if (it.length < 2) {
                             otp3 = it
+
+                            focusManager.moveFocus(focusDirection = FocusDirection.Next)
+
                         }
                     })
                 OutlinedTextField(
                     modifier = Modifier
                         .width(50.dp)
-                        .padding(2.dp),
+                        .padding(2.dp)
+                        .onKeyEvent {
+                            var count = 0;
+                            if (it.key == Key.Backspace) {
+                                count++
+
+                                focusManager.moveFocus(focusDirection = FocusDirection.Previous)
+
+                            }
+                            true
+                        },
                     value = "$otp4",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
@@ -203,12 +191,24 @@ fun EnterCode(navController: NavHostController) {
                     onValueChange = {
                         if (it.length < 2) {
                             otp4 = it
+
+
+                            focusManager.moveFocus(focusDirection = FocusDirection.Next)
+
                         }
                     })
                 OutlinedTextField(
                     modifier = Modifier
                         .width(50.dp)
-                        .padding(2.dp),
+                        .padding(2.dp)
+                        .onKeyEvent {
+                            var count = 0;
+                            if (it.key == Key.Backspace) {
+                                count++
+                                focusManager.moveFocus(focusDirection = FocusDirection.Previous)
+                            }
+                            true
+                        },
                     value = "$otp5",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
@@ -217,12 +217,21 @@ fun EnterCode(navController: NavHostController) {
                     onValueChange = {
                         if (it.length < 2) {
                             otp5 = it
+                            focusManager.moveFocus(focusDirection = FocusDirection.Next)
                         }
                     })
                 OutlinedTextField(
                     modifier = Modifier
                         .width(50.dp)
-                        .padding(2.dp),
+                        .padding(2.dp)
+                        .onKeyEvent {
+                            var count = 0;
+                            if (it.key == Key.Backspace) {
+                                count++
+                                focusManager.moveFocus(focusDirection = FocusDirection.Previous)
+                            }
+                            true
+                        },
                     value = "$otp6",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
