@@ -104,7 +104,7 @@ fun EnterCode(navController: NavHostController) {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                     ),
-
+//added
                     onValueChange = {
                         if (it.length < 2) {
                             otp1 = it
