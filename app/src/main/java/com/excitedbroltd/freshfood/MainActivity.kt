@@ -11,6 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FreshFoodTheme {
+                // call navigation function from here
                 Navigation()
             }
         }
