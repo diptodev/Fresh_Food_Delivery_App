@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,22 +50,22 @@ fun EnterCode(navController: NavHostController) {
 
     val focusManager = LocalFocusManager.current
     var otp1 by remember {
-        mutableStateOf("")
+        mutableStateOf("_")
     }
     var otp2 by remember {
-        mutableStateOf("")
+        mutableStateOf("_")
     }
     var otp3 by remember {
-        mutableStateOf("")
+        mutableStateOf("_")
     }
     var otp4 by remember {
-        mutableStateOf("")
+        mutableStateOf("_")
     }
     var otp5 by remember {
-        mutableStateOf("")
+        mutableStateOf("_")
     }
     var otp6 by remember {
-        mutableStateOf("")
+        mutableStateOf("_")
     }
     LaunchedEffect(key1 = Unit) {
         focusRequester.requestFocus()
@@ -104,13 +106,12 @@ fun EnterCode(navController: NavHostController) {
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                     ),
-//added
                     onValueChange = {
-                        if (it.length < 2) {
-                            otp1 = it
-                            if (otp1.isNotEmpty()) {
-                                focusManager.moveFocus(focusDirection = FocusDirection.Next)
-                            }
+                        if (it.length == 2) {
+                            otp1 = it[0].toString()
+                            focusManager.moveFocus(focusDirection = FocusDirection.Next)
+                        } else {
+                            otp1 = "_"
                         }
                     })
                 OutlinedTextField(
@@ -118,27 +119,19 @@ fun EnterCode(navController: NavHostController) {
                         .width(50.dp)
                         .padding(2.dp)
                         .onKeyEvent {
-                            var count = 0;
-                            if (it.key == Key.Backspace) {
-                                count++
-                                if (count == 2) {
-                                    focusManager.moveFocus(focusDirection = FocusDirection.Previous)
-                                }
-                            }
+                            Log.d("OTP_TAG", "EnterCode: Backspace clicked")
                             true
                         },
                     value = "$otp2",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
-
-                        ),
+                    ),
                     onValueChange = {
-
-                        if (it.length < 2) {
-                            otp2 = it
-
+                        if (it.length == 2) {
+                            otp2 = it[0].toString()
                             focusManager.moveFocus(focusDirection = FocusDirection.Next)
-
+                        } else {
+                            otp2 = "_"
                         }
                     })
                 OutlinedTextField(
@@ -162,11 +155,11 @@ fun EnterCode(navController: NavHostController) {
                         ),
 
                     onValueChange = {
-                        if (it.length < 2) {
-                            otp3 = it
-
+                        if (it.length == 2) {
+                            otp3 = it[0].toString()
                             focusManager.moveFocus(focusDirection = FocusDirection.Next)
-
+                        } else {
+                            otp3 = "_"
                         }
                     })
                 OutlinedTextField(
@@ -189,12 +182,11 @@ fun EnterCode(navController: NavHostController) {
 
                         ),
                     onValueChange = {
-                        if (it.length < 2) {
-                            otp4 = it
-
-
+                        if (it.length == 2) {
+                            otp4 = it[0].toString()
                             focusManager.moveFocus(focusDirection = FocusDirection.Next)
-
+                        } else {
+                            otp4 = "_"
                         }
                     })
                 OutlinedTextField(
@@ -215,9 +207,11 @@ fun EnterCode(navController: NavHostController) {
 
                         ),
                     onValueChange = {
-                        if (it.length < 2) {
-                            otp5 = it
+                        if (it.length == 2) {
+                            otp5 = it[0].toString()
                             focusManager.moveFocus(focusDirection = FocusDirection.Next)
+                        } else {
+                            otp5 = "_"
                         }
                     })
                 OutlinedTextField(
@@ -238,8 +232,11 @@ fun EnterCode(navController: NavHostController) {
 
                         ),
                     onValueChange = {
-                        if (it.length < 2) {
-                            otp6 = it
+                        otp6 = if (it.length == 2) {
+                            it[0].toString()
+
+                        } else {
+                            "_"
                         }
                     })
 
@@ -249,7 +246,7 @@ fun EnterCode(navController: NavHostController) {
                     .padding(top = 10.dp)
                     .clip(RoundedCornerShape(40.dp))
                     .clickable {
-
+                        Log.d("OTP_TAG", "EnterCode: $otp1 $otp2 $otp3 $otp4 $otp5 $otp6")
                     }
                     .background(DeepGreen)
                     .fillMaxWidth()
