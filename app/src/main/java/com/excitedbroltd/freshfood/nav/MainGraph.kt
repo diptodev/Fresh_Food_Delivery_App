@@ -7,7 +7,7 @@ import androidx.navigation.navigation
 import com.excitedbroltd.freshfood.ui.screens.main_screen.Home
 
 fun NavGraphBuilder.MainGraph(navController: NavHostController) {
-    navigation(startDestination = Screen.Home.route, route = MAIN) {
+    navigation(startDestination = Screen.Home.route, route = MAIN_GRAPH) {
         composable(route = Screen.Home.route) {
             Home(navController)
         }

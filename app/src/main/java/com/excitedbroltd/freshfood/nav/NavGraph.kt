@@ -10,7 +10,7 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = startDestination("login"),
+        startDestination = startDestination("main_graph"),
         route = ROOT
     ) {
         SplashScreenGraph(navController)
@@ -25,6 +25,7 @@ fun startDestination(s: String): String {
     when (s) {
         "login" -> return AUTH_GRAPH
         "get_started" -> return SPLASH_GRAPH
+        "main_graph" -> return MAIN_GRAPH
     }
     return ""
 }
