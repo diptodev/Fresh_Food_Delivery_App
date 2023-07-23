@@ -1,6 +1,5 @@
 package com.excitedbroltd.freshfood.ui.screens.main_screen
 
-import android.graphics.drawable.Icon
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,15 +14,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -36,27 +32,34 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.excitedbroltd.freshfood.R
+import com.excitedbroltd.freshfood.dataclass.Categories
 import com.excitedbroltd.freshfood.ui.theme.LightGray
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(navController: NavHostController) {
     var query: String by rememberSaveable { mutableStateOf("") }
-    val array = listOf("Fresh fruit", "Fresh Dry", "Dry Food", "Make me happy")
+    val array = listOf(
+        Categories("Fresh Fruits", "FreshId fruits", Color.Red),
+        Categories("Fresh Diary", "FreshId fruits", Color.Yellow),
+        Categories("Fresh Vegetable", "FreshId fruits", Color.Green)
+    )
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = LightGray),
-        contentAlignment = Alignment.Center
-    ) {
+            .background(color = LightGray)
+            .padding(top = 20.dp),
+
+        ) {
         Column() {
             // val containerColor = FilledTextFieldTokens.ContainerColor.toColor()
             TextField(
@@ -104,7 +107,7 @@ fun Home(navController: NavHostController) {
                     .fillMaxWidth()
                     .height(250.dp)
                     .padding(15.dp),
-                elevation = CardDefaults.cardElevation(10.dp)
+                // elevation = CardDefaults.cardElevation(10.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.splash_screen_fruits),
@@ -116,7 +119,7 @@ fun Home(navController: NavHostController) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(200.dp)
             ) {
                 Row(
                     modifier = Modifier
@@ -131,14 +134,25 @@ fun Home(navController: NavHostController) {
                         .clickable { })
                 }
 
-                LazyRow() {
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 10.dp, end = 10.dp)
+                ) {
                     items(array) {
                         Card(
                             modifier = Modifier
-                                .height(150.dp)
-                                .width(100.dp)
+                                .height(200.dp)
+                                .width(135.dp)
+                                .padding(5.dp),
                         ) {
-                            Text(text = it)
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(color = it.foodCategoriesColor.copy(0.1f)),
+                            ) {
+                                Text(text = it.foodCategories, textAlign = TextAlign.Center, fontSize = 25.sp)
+                            }
                         }
                     }
                 }
